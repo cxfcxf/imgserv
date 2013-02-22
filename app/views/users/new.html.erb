@@ -1,0 +1,9 @@
+<div class = "Sign_Form">
+	<hl>Sign Up<hl>
+	<%= form_for @users do |f| %>
+		<p> Username:</br><%= f.text_field :username %></p>
+		<p> Password:</br><%= f.text_field :password %></p>
+		<p> Email:</br><%= f.text_field :email %></p>
+		<%= f.submit %>
+	<% end %>
+</div>

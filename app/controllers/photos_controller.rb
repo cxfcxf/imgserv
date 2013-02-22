@@ -1,11 +1,11 @@
 class PhotosController < ApplicationController
-	def index
+	def new
 		@photos = Photo.new
 	end
 	
 	def create
 #		binding.pry
-		tmp_file = params[:photo][:imgdir]
+		tmp_file = params[:photo][:file]
 		t = Time.now.to_i
 		suffix = tmp_file.original_filename.split('.').last
 		filesavepath = Rails.root.join("imgfile", t.to_s + '.' + suffix)
