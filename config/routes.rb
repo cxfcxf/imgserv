@@ -1,6 +1,5 @@
 Imgserv::Application.routes.draw do
   get "upload/index"
-  get "photo/index"
   
   resources :photos
 
