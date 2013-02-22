@@ -1,5 +1,5 @@
 
 <%= form_for @photos do |f| %>
-	<%= file_field :photos, :imgdir %>
+	<%= f.file_field :imgdir %>
 	<%= f.submit %>
 	<% end %>
