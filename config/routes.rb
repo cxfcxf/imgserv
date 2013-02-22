@@ -1,7 +1,5 @@
 Imgserv::Application.routes.draw do
   get "sessions/new"
-
-  get "upload/index"
   
   resources :photos
   
