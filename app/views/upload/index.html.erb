@@ -1,0 +1,18 @@
+<h1>Imglist</h1>
+<table>
+
+<% @users.each do |user| %>
+<tr>
+	<td><%= user.username %></td>
+	<% user.photos.each do |p| %>
+		<td><%= p.imgdir %></td>
+	<% end %>
+</tr>
+<% end %>
+
+</table>
+
+<%= form_for @photos do |f| %>
+	<%= file_field :photos, :imgdir %>
+	<%= f.submit %>
+	<% end %>
