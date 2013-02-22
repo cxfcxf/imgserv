@@ -4,7 +4,8 @@ class PhotosController < ApplicationController
 	end
 	
 	def create
-	tmp_file = params[:photos][:imgdir]
-	FileUtils.mv tmp_file, Rails.root.join("imgfile","Time.now.to_f")
+		tmp_file = params[:photos][:imgdir]
+		t = Time.now.to_i
+		FileUtils.mv tmp_file, Rails.root.join("imgfile", t.to_s)
 	end
 end
