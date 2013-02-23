@@ -9,14 +9,15 @@ class PhotosController < ApplicationController
 		t = Time.now.to_i
 		suffix = tmp_file.original_filename.split('.').last
 		filesavepath = Rails.root.join("imgfile", t.to_s + '.' + suffix)
-		Photo.create(:user_id => '1', :imgdir => filesavepath.to_s)
+		uid = session[:user_id]
+		Photo.create(:user_id => uid, :imgdir => filesavepath.to_s)
 		
 		FileUtils.mv tmp_file.path, filesavepath
 		
 		if $? == 0
-			redirect_to :action => 'index'
+			redirect_to :action => 'new'
 		else
-			redirect_to :action => 'index'
+			redirect_to :action => 'new'
 		end
 	end
 	
