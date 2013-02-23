@@ -1,5 +1,11 @@
 
-<%= form_for @photos do |f| %>
+<% @images.each do |img| %>
+<p>Img Url:</ br><%= img.imgdir.url %></p>
+<% end %>
+
+<%= form_for @photos, :html => {:multipart => true} do |f| %>
+	<label>My Photo</label>
 	<%= f.file_field :file %>
 	<%= f.submit %>
 	<% end %>
+
