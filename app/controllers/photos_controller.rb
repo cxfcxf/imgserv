@@ -33,10 +33,10 @@ class PhotosController < ApplicationController
 	def create
 		uid = current_user.id
 		
-		p = Photo.new(:user_id => uid)
-		p.imgdir = params[:photo][:file]
+		@p = Photo.new(:user_id => uid)
+		@p.imgdir = params[:photo][:file]
 		
-		if p.save!
+		if @p.save!
 			redirect_to :action => 'new'
 		else
 			redirect_to :action => 'new'
@@ -44,8 +44,12 @@ class PhotosController < ApplicationController
 	end
 	
 	def destroy
-	
-	
+		@img = Photo.find(params[:id])
+		@img.destroy
+		
+		if @img.save!
+			redirect_to :action => "new"
+		end
 	end
 
 end
