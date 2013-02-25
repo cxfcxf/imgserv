@@ -1,6 +1,9 @@
 class PhotosController < ApplicationController
+	before_filter :authenticate_user!
+	
 	def new
-		uid = session[:user_id]
+		
+		uid = current_user.id
 		
 		@photos = Photo.new
 		
@@ -28,7 +31,7 @@ class PhotosController < ApplicationController
 #	end
 
 	def create
-		uid = session[:user_id]
+		uid = current_user.id
 		
 		p = Photo.new(:user_id => uid)
 		p.imgdir = params[:photo][:file]
@@ -38,6 +41,11 @@ class PhotosController < ApplicationController
 		else
 			redirect_to :action => 'new'
 		end
+	end
+	
+	def destroy
+	
+	
 	end
 
 end

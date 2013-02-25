@@ -1,6 +1,11 @@
 
-<% @images.each do |img| %>
-<p>Img Url:</ br><%= img.imgdir.url %></p>
+<% @images.each do |image| %>
+<p>Img Url:</ br><%= image.imgdir.url %></p>
+<div class="action">
+	<%= link_to "edit", edit_image_path(photo) %> |
+	<%= link_to "remove", image, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+
 <% end %>
 
 <%= form_for @photos, :html => {:multipart => true} do |f| %>
@@ -8,4 +13,3 @@
 	<%= f.file_field :file %>
 	<%= f.submit %>
 	<% end %>
-

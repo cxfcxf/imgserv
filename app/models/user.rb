@@ -1,14 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :id, :password, :username
-  has_many :photos
-  
-  def self.authenticate(username, password)
-  	user = find_by_username(username)
-  	if user.password == password
-  		user
-  	else
-  		nil
-  	end
-  end
-  
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  # attr_accessible :title, :body
+  has_many :photos, :dependent => :destroy
 end
