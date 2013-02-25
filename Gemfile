@@ -25,6 +25,7 @@ gem 'pry-nav'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'carrierwave'
 gem 'devise'
+gem 'bootstrap-sass'
 
 
 # To use ActiveModel has_secure_password
