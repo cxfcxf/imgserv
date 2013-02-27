@@ -27,6 +27,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem 'carrierwave'
 gem 'devise'
 gem 'rmagick'
+gem 'simple_form'
 
 
 # To use ActiveModel has_secure_password
