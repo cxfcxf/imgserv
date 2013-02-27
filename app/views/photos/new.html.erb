@@ -1,13 +1,19 @@
+<div class="page-header">
+	<h1>Your Uploaded Photos Are Listed Below</h1>
+</div>
+
 
 <% @images.each do |image| %>
-Img Url:</ br><%= image.imgdir.url %>
+<p>Thumb view Url:</br><%= image_tag image.imgdir.url(:thumb) if image.imgdir? %></p>
+<p>you can use your photo in forum by pasting following link:</p>
+<p>[img]http://img.saraba1st.com/imgserv<%= image.imgdir.url if image.imgdir? %>[/img]</P>
 <%= link_to "remove", image, :confirm => 'Are you sure?', :method => :delete %>
 </br>
 
 <% end %>
 
 <%= form_for @photos, :html => {:multipart => true} do |f| %>
-	<label>My Photo</label>
+	<label>upload your photos below</label>
 	<%= f.file_field :file %>
 	<%= f.submit %>
 	<% end %>

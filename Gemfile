@@ -13,6 +13,7 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'bootstrap-sass'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -25,7 +26,7 @@ gem 'pry-nav'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'carrierwave'
 gem 'devise'
-gem 'bootstrap-sass'
+gem 'rmagick'
 
 
 # To use ActiveModel has_secure_password
