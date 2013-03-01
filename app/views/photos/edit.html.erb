@@ -1,6 +1,10 @@
 <hl>Hello world<hl>
 
-<%= form_for @text do |t| %>
-	<%= t.textfield :text %>
+<%= form_for @photo do |t| %>
+	<div>
+		<%= t.label :embed_text %>
+		<%= t.text_field :embed_text %>
+	</div>
+	
 	<%= t.submit %>
-	<% end %>
+<% end %>

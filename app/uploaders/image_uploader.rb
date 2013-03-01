@@ -46,11 +46,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   
    #process :resize_to_fit => [800, 800]
-   version :thumb do
-   #  process :scale => [50, 50]
-      process :resize_to_limit => [200, 200]
-   end
-
+  version :thumb do
+  #  process :scale => [50, 50]
+     process :resize_to_limit => [200, 200]
+  end
+  
+  def textembed
+    puts "textembed"
+    binding.pry
+  end
+  
+  def require_embed_text?(file)
+   return model.require_embed_text?
+  end
+  
+  version :embed, :if => :require_embed_text? do
+    process :textembed
+  end
+  
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
    def extension_white_list
