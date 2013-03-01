@@ -52,8 +52,21 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   def textembed
-    puts "textembed"
-    binding.pry
+    cache_stored_file! if !cached?
+    
+    manipulate! do |img|
+      # binding.pry
+      text = model.embed_text
+      draw = Magick::Draw.new
+      img.annotate(draw, 0, 0, 0, 0, text) do |t|
+        t.gravity = Magick::SouthGravity
+        t.pointsize = 32
+        t.stroke = 'transparent'
+        t.font_weight = Magick::BoldWeight
+        t.font_family = 'Helvetica'
+        t.fill = 'white'
+      end
+    end
   end
   
   def require_embed_text?(file)
