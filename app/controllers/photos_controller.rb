@@ -51,5 +51,16 @@ class PhotosController < ApplicationController
 			redirect_to :action => "new"
 		end
 	end
+	
+	def edit
+		@img = Photo.find(params[:id])
+		if textembed(@text, @img)
+			redirect_to :action => "new"
+		else
+			redirect_to :action => "edit"
+		end
+		
+		
+	end
 
 end
