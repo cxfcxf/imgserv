@@ -1,6 +1,8 @@
-<hl>Hello world<hl>
+<div class='page-header'>
+	<hl>annotate your image<hl>
+</div>
 
-<%= form_for @text do |t| %>
-	<%= t.textfield :text %>
-	<%= t.submit %>
+<%= form_for @photo do |p| %>
+	<%= p.text_field :embed_text %>
+	<%= p.submit %>
 	<% end %>

@@ -4,6 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
+  include Magick
   # include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
@@ -50,6 +51,14 @@ class ImageUploader < CarrierWave::Uploader::Base
    #  process :scale => [50, 50]
       process :resize_to_limit => [200, 200]
    end
+   
+  def require_embed_text?(file)
+    return model.require_embed_text?
+  end
+
+  version :embed, :if => :require_embed_text? do
+    process :textEmbed
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -63,5 +72,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+
+def textEmbed
+  cache_stored_file! if !cached?
+  
+  manipulate! do |source|
+    text = model.embed_text
+
+    txt = Draw.new
+    txt.gravity = SouthGravity
+    txt.pointsize = 32
+    txt.stroke = 'transparent'
+    txt.font_weight = BoldWeight
+    txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
+    txt.font_family = 'Helvetica'
+    txt.fill = 'white'
+    source = source.resize_to_fill(300, 300).border(10, 10, "black")
+    source.annotate(txt, 0, 0, 0, 40, text)
+  end
+end
 
 end

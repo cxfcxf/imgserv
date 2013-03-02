@@ -53,11 +53,22 @@ class PhotosController < ApplicationController
 	end
 	
 	def edit
-		@img = Photo.find(params[:id])
-		if textembed(@text, @img)
-			redirect_to :action => "new"
+		@photo = Photo.find(params[:id])
+		#txt = params[:photo][:text]
+		#if @img.imgdir.textEmbed(txt)
+		#	redirect_to :action => "new"
+		#else
+		#	redirect_to :action => "edit"
+	end
+	
+	def update
+		@photo = Photo.find(params[:id])
+		@photo.imgdir.recreate_versions! :embed
+#		if @photo.update_attributes(params[:photo])
+			@photo.save!
+			redirect_to :action => 'new'
 		else
-			redirect_to :action => "edit"
+			render :edit
 		end
 		
 		

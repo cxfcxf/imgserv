@@ -5,6 +5,7 @@
 
 <% @images.each do |image| %>
 <p>Thumb view Url:</br><%= image_tag image.imgdir.url(:thumb) if image.imgdir? %></p>
+<p>Embed view Url:</br><%= image_tag image.imgdir.url(:embed) if image.imgdir? %></p>
 <p>you can use your photo in forum by pasting following link:</p>
 <p>[img]http://img.saraba1st.com/imgserv<%= image.imgdir.url if image.imgdir? %>[/img]</P>
 <%= link_to "edit", edit_photo_path(image) %> |
