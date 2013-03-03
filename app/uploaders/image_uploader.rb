@@ -57,7 +57,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :embed, :if => :require_embed_text? do
-    process :textEmbed
+    process :text_embed
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -73,17 +73,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
 
-def textEmbed
+def text_embed
   cache_stored_file! if !cached?
   
   manipulate! do |source|
     text = model.embed_text
 
     txt = Draw.new
-    txt.gravity = SouthGravity
+    txt.gravity = Magick::SouthGravity
     txt.pointsize = 32
     txt.stroke = 'transparent'
-    txt.font_weight = BoldWeight
+    txt.font_weight = Magick::BoldWeight
     txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
     txt.font_family = 'Helvetica'
     txt.fill = 'white'
