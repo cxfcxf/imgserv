@@ -63,8 +63,7 @@ class PhotosController < ApplicationController
 	
 	def update
 		@photo = Photo.find(params[:id])
-		@photo.imgdir.recreate_versions! :embed
-#		if @photo.update_attributes(params[:photo])
+		if @photo.update_attributes(params[:photo])
 			@photo.save!
 			redirect_to :action => 'new'
 		else
