@@ -25,8 +25,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-   # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-   "uploads/#{Time.now.year.to_s}/#{Time.now.month.to_s}/#{Time.now.day.to_s}"
+   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+   # "uploads/#{Time.now.year.to_s}/#{Time.now.month.to_s}/#{Time.now.day.to_s}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -49,7 +49,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    #process :resize_to_fit => [800, 800]
    version :thumb do
    #  process :scale => [50, 50]
-      process :resize_to_limit => [200, 200]
+      process :resize_to_fill => [300, 300]
    end
    
   def require_embed_text?(file)
@@ -72,23 +72,35 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  def south_or_north?
+    if model.embed_pos == "下部吐槽"
+      return SouthGravity
+    elsif model.embed_pos == "上部吐槽"
+      return NorthGravity
+    else
+      return SouthGravity
+    end
+  end
+
 
 def textEmbed
   cache_stored_file! if !cached?
+  embed_color = south_or_north?
+
   
   manipulate! do |source|
     text = model.embed_text
 
     txt = Draw.new
-    txt.gravity = SouthGravity
-    txt.pointsize = 32
-    txt.stroke = 'transparent'
+    txt.gravity = south_or_north?
+    txt.pointsize = model.embed_size.to_i
+    txt.stroke = model.embed_color
     txt.font_weight = BoldWeight
     txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
     txt.font_family = 'Helvetica'
-    txt.fill = 'white'
-    source = source.resize_to_fill(300, 300).border(10, 10, "black")
-    source.annotate(txt, 0, 0, 0, 40, text)
+    txt.fill = model.embed_color
+    source = source.resize_to_fill(300, 300)
+    source.annotate(txt, 0, 0, 0, 5, text)
   end
 end
 

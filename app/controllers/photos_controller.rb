@@ -11,24 +11,6 @@ class PhotosController < ApplicationController
 		@images = Photo.find(:all, :conditions => {:user_id => uid})
 		
 	end
-	
-#	def create
-#		binding.pry
-#		tmp_file = params[:photo][:file]
-#		t = Time.now.to_i
-#		suffix = tmp_file.original_filename.split('.').last
-#		filesavepath = Rails.root.join("imgfile", t.to_s + '.' + suffix)
-#		uid = session[:user_id]
-#		Photo.create(:user_id => uid, :imgdir => filesavepath.to_s)
-#		
-#		FileUtils.mv tmp_file.path, filesavepath
-#		
-#		if $? == 0
-#			redirect_to :action => 'new'
-#		else
-#			redirect_to :action => 'new'
-#		end
-#	end
 
 	def create
 		uid = current_user.id
@@ -54,11 +36,6 @@ class PhotosController < ApplicationController
 	
 	def edit
 		@photo = Photo.find(params[:id])
-		#txt = params[:photo][:text]
-		#if @img.imgdir.textEmbed(txt)
-		#	redirect_to :action => "new"
-		#else
-		#	redirect_to :action => "edit"
 	end
 	
 	def update

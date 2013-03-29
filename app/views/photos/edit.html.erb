@@ -1,8 +1,19 @@
 <div class='page-header'>
-	<hl>annotate your image<hl>
+	<h1><center>请吐槽您上传的图片</center><h1>
 </div>
-
-<%= form_for @photo do |p| %>
-	<%= p.text_field :embed_text %>
-	<%= p.submit %>
-	<% end %>
+<div class="container">
+	<div class="row-fluid">
+		<div class="span4 offset1">
+			<%= image_tag @photo.imgdir.url(:thumb), :label => "原图" if @photo.imgdir? %>
+		</div>
+<div class="span4 pull-right">
+<%= simple_form_for @photo do |f| %>
+	<%= f.input :embed_pos, :collection => ['上部吐槽', '下部吐槽' ], :prompt => '选择一个位置', :label => "位置" %>
+	<%= f.input :embed_size, :collection => 10..50, :label => "字体大小" %>
+	<%= f.input :embed_text, :label => "往这儿吐槽" %>
+	<%= f.input :embed_color, :label => "选择颜色" %>
+	<%= f.submit "创建吐槽" %>
+<% end %>
+</div>
+	</div>
+</div>
