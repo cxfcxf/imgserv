@@ -6,8 +6,8 @@
 	<div class="row-fluid">
 		<div class="span9">
 			<% @images.each do |image| %>
-				<li>
-					<a herf="#" class="thumbnail">
+				<li class="home">
+					<a herf="#" class="fancybox">
 						<%= image_tag image.imgdir.url(:embed), :height => "200", :width => "200" if image.imgdir? %>
 					</a>
 				</li>

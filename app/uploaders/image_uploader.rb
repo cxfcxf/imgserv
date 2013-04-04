@@ -85,7 +85,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
 def textEmbed
   cache_stored_file! if !cached?
-  embed_color = south_or_north?
+  embed_color = '#' + model.embed_color
 
   
   manipulate! do |source|
@@ -94,11 +94,11 @@ def textEmbed
     txt = Draw.new
     txt.gravity = south_or_north?
     txt.pointsize = model.embed_size.to_i
-    txt.stroke = model.embed_color
+    txt.stroke = embed_color
     txt.font_weight = BoldWeight
     txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
     txt.font_family = 'Helvetica'
-    txt.fill = model.embed_color
+    txt.fill = embed_color
     source = source.resize_to_fill(300, 300)
     source.annotate(txt, 0, 0, 0, 5, text)
   end

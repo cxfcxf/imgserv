@@ -15,14 +15,18 @@ class PhotosController < ApplicationController
 	def create
 		uid = current_user.id
 		
-		@p = Photo.new(:user_id => uid)
-		@p.imgdir = params[:photo][:file]
-		
-		if @p.save!
+		if current_user.photos.size >= 6
 			redirect_to :action => 'new'
 		else
-			redirect_to :action => 'new'
-		end
+			@p = Photo.new(:user_id => uid)
+			@p.imgdir = params[:photo][:file]
+		
+			if @p.save!
+			   redirect_to :action => 'new'
+		  else
+			   redirect_to :action => 'new'
+		  end
+    end
 	end
 	
 	def destroy
