@@ -7,12 +7,9 @@
 <div class="span8">
  <% @images.each do |image| %>
       <li class="inner">
-        <a herf="#" class="thumbnail">
-           <%= image_tag image.imgdir.url(:thumb) if image.imgdir? %> 
-        </a>
-        <a herf="#" class="thumbnail">
-          <%= image_tag image.imgdir.url(:embed) if !image.imgdir.embed.blank? %>
-        </a>
+        <%=link_to image_tag(image.imgdir.url(:thumb)), image.imgdir.url if image.imgdir? %> 
+        <%= link_to image_tag(image.imgdir.url(:embed)), image.imgdir.url(:embed), :class => "fancybox" if !image.imgdir.embed.blank? %>
+
     <div class="btn-group">
       <%= link_to "吐槽", edit_photo_path(image), :class => "btn" %> 
       <%= link_to "删除", photo_path(image), :class => "btn", :confirm => '你确定要删除吗', :method => :delete %>
