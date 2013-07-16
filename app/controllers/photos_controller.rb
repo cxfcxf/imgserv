@@ -9,7 +9,6 @@ class PhotosController < ApplicationController
 		
 		#binding.pry
 		@images = Photo.find(:all, :conditions => {:user_id => uid})
-		
 	end
 
 	def create
@@ -44,14 +43,13 @@ class PhotosController < ApplicationController
 	
 	def update
 		@photo = Photo.find(params[:id])
+		#binding.pry
 		if @photo.update_attributes(params[:photo])
 			@photo.save!
 			redirect_to :action => 'new'
 		else
 			render :edit
 		end
-		
-		
 	end
 
 end

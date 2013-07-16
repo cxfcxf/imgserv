@@ -11,6 +11,7 @@
  *= require_self
  *= require fancybox
  *= require jPicker-1.1.6
+ *= require jquery.Jcrop
  *= require_tree .
  */
  

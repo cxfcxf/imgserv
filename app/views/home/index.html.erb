@@ -7,7 +7,7 @@
 		<div class="span9">
 			<% @images.each do |image| %>
 				<li class="home">
-					<%=link_to image_tag(image.imgdir.url(:embed), :height => "200", :width => "200"), image.imgdir.url(:embed), :class => "fancybox" if image.imgdir? %>
+					<%=link_to image_tag(image.imgdir.url(:embed), :height => "200", :width => "200"), image.imgdir.url(:embed), :class => "fancybox", :rel => "gp" if image.imgdir? %>
 				</li>
 			<% end %>
 		</div>

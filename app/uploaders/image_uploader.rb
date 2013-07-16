@@ -49,7 +49,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    #process :resize_to_fit => [800, 800]
    version :thumb do
    #  process :scale => [50, 50]
-      process :resize_to_fill => [300, 300]
+      process :resize_to_fill => [400, 400]
    end
    
   def require_embed_text?(file)
@@ -72,36 +72,62 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  def south_or_north?
-    if model.embed_pos == "下部吐槽"
-      return SouthGravity
-    elsif model.embed_pos == "上部吐槽"
-      return NorthGravity
-    else
-      return SouthGravity
-    end
-  end
-
 
 def textEmbed
   cache_stored_file! if !cached?
   embed_color = '#' + model.embed_color
+  coords = model.embed_coords.split(",")
+  coords.map! {|s| s.to_i}
 
-  
+#old model 
+#  manipulate! do |source|
+#    text = model.embed_text_south#
+
+#    txt = Draw.new
+#    txt.gravity = SouthGravity
+#    txt.pointsize = model.embed_size.to_i
+#    txt.stroke = embed_color
+#    txt.font_weight = BoldWeight
+#    txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
+#    txt.font_family = 'Helvetica'
+#    txt.fill = embed_color
+#    source = source.resize_to_fill(400, 400)
+#    source.annotate(txt, 0, 0, 0, 5, text)
+#  end
+#  
+#  
+#  manipulate! do |source|
+#    text = model.embed_text_north#
+
+#    txt = Draw.new
+#    txt.gravity = NorthGravity
+#    txt.pointsize = model.embed_size.to_i
+#    txt.stroke = embed_color
+#    txt.font_weight = BoldWeight
+#    txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
+#    txt.font_family = 'Helvetica'
+#    txt.fill = embed_color
+#    source = source.resize_to_fill(400, 400)
+#    source.annotate(txt, 0, 0, 0, 5, text)
+#  end
+
+#new model
   manipulate! do |source|
     text = model.embed_text
-
+    
     txt = Draw.new
-    txt.gravity = south_or_north?
+#    txt.gravity = Default
     txt.pointsize = model.embed_size.to_i
     txt.stroke = embed_color
     txt.font_weight = BoldWeight
     txt.font = Rails.root.join('fonts', 'YaHei.ttf').to_s
     txt.font_family = 'Helvetica'
     txt.fill = embed_color
-    source = source.resize_to_fill(300, 300)
-    source.annotate(txt, 0, 0, 0, 5, text)
+    source = source.resize_to_fill(400, 400)
+    source.annotate(txt, coords[0], coords[1], coords[2], coords[3]+15, text)
   end
+
+
 end
 
 end

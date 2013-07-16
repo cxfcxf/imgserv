@@ -8,7 +8,7 @@
  <% @images.each do |image| %>
       <li class="inner">
         <%=link_to image_tag(image.imgdir.url(:thumb)), image.imgdir.url if image.imgdir? %> 
-        <%= link_to image_tag(image.imgdir.url(:embed)), image.imgdir.url(:embed), :class => "fancybox" if !image.imgdir.embed.blank? %>
+        <%=link_to image_tag(image.imgdir.url(:embed)), image.imgdir.url(:embed), :class => "fancybox", :rel => "gpi" if !image.imgdir.embed.blank? %>
 
     <div class="btn-group">
       <%= link_to "吐槽", edit_photo_path(image), :class => "btn" %> 
@@ -21,6 +21,23 @@
 </div>
 
 <div class="span3 pull-right">
+  <div class="well">
+    <h5>修正图片引用地址:<br>
+    1 2 3<br>
+    4 5 6<br>
+    顺序上至下.</h3>
+  <li class="url"> 
+    <% @images.each do |img| %>
+      <% if !img.imgdir.embed.blank? %>
+            <h5><%= link_to "吐槽图片引用地址", img.imgdir.url(:embed) %></h5>
+      <% else %>
+            <h5>没有吐槽图片引用地址</h5>
+    <% end %>
+    <% end %>
+  </li>
+</div>
+
+  
 <%= simple_form_for @photos, :html => {:multipart => true} do |f| %>
 	<h2><center><b>请上您的图片</b></h2>
 

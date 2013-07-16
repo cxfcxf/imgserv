@@ -1,11 +1,13 @@
 Imgserv::Application.routes.draw do
-  devise_for :users
+
+devise_for :users
 
 
 root :to => "home#index"
 
 resources :photos
 
+#devise_for :users do get 'users', :to => 'site#index', :as => :user_root # Rails 3 end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

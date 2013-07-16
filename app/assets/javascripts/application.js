@@ -15,3 +15,4 @@
 //= require_tree .
 //= require fancybox
 //= require jpicker-1.1.6
+//= require jquery.Jcrop.js
