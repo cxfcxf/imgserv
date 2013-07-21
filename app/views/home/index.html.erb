@@ -15,7 +15,7 @@
 				<h2>登陆</h2>
 			<div class="form-inputs">
 				<%= simple_form_for "user", :url => user_session_path do |f| %>
-				<%= f.input :username, placeholder: '用户名', :label => "用户名" %>
+				<%= f.input :username, placeholder: 'S1用户名', :label => "用户名" %>
 				<%= f.input :password, placeholder: '登陆密码', :label => "登陆密码" %>
 					<div class="control-group boolean inline optional">
 						<%= f.check_box :remember_me %> 记住我？
